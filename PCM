@@ -1,0 +1,60 @@
+clc; clear; close all;
+f = 4000;
+fs = 10*f;
+t = 0:1/fs:100/fs;
+x = 7*sin(2*pi*f*t);
+n = 0: length(t)-1;
+subplot(5,1,1);
+plot(t,x);
+ylabel("Amplitude");
+xlabel("Time");
+title("Input Signal");
+%Sampling
+xn = 7*sin(2*pi*f*n/fs);
+subplot(5,1,2);
+stem(n,xn);
+title("Sampled Wave");
+ylabel("Amplitude");
+xlabel("Sample No");
+y=[];
+% Quantization and Encoding
+for i=1:length(x)
+if x(i)<-6.5
+        a=[0 0 0 0];
+        y=[y a];
+end
+if (x(i)<-5.5 && x(i)>-6.5)
+        a=[0 0 1];
+        y=[y a];
+end
+if (x(i)<-4.5 && x(i)>-5.5)
+       a=[0 0 1 0];
+       y=[y a];
+end
+if (x(i)<-3.5 && x(i)>-4.5)
+        a=[0 0 1 1];
+        y=[y a];
+end
+if (x(i)<-2.5 && x(i)>-3.5)
+        a=[0 1 0 0];
+        y=[y a];
+end
+if (x(i)<-1.5 && x(i)>-2.5)
+        a=[0 1 0 1];
+        y=[y a];
+end
+if (x(i)<-0.5 && x(i)>-1.5)
+        a=[0 1 1 0];
+        y=[y a];
+end
+if (x(i)<0.5 && x(i)>-0.5)
+a=[0 1 1 1]]
+y=[y a];
+end       
+if (x(i)<1.5 && x(i)>0.5)
+        a=[1 0 0 0];
+        y=[y a];
+end
+if (x(i)<2.5 && x(i)>1.5)
+       a=[1 0 0 1];
+       y=[y a];
