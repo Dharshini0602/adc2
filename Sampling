@@ -1,0 +1,41 @@
+clc; clear; close all;
+n=0:.01:10;
+T=2;
+fm=1/T;
+x=cos(2*pi*fm*n);
+subplot(2,2,1);
+plot(nix);
+xlabel('time');ylabel('x(t)')
+title('continuous time signal')
+grid;
+fs1=1.5*fm;%under sampling
+fs2=2*fm;%critical sampling
+fs3=8*fm;%over sampling
+x1=cos(2*pi*fm/fs1*n);
+subplot(2,2,2);
+stem(n,x1);
+xlabel('time');ylabel('x(n)')
+title('discrete time signal with fs<2fm')
+hold on
+grid;
+x2=cos(2*pi*fm/fs2*n);
+subplot(2,2,3);
+stem(n,x2);
+xlabel('time');ylabel('x(n)')
+title('discrete time signal with fs=2fm')
+hold on
+grid;
+x3=cos(2*pi*fm/fs3*n);
+subplot(2,2,4);
+stem(n,x3);
+xlabel('time');ylabel('x(n)')
+title('discrete time signal with fs>2fm')
+hold on
+grid;
+figure;
+subplot(3,1,1)
+pspectrum(x1,fs1);
+subplot(3,1,2)
+pspectrum(x2,fs2);
+subplot(3,1,3)
+pspectrum(x3,fs3);
