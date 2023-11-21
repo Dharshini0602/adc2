@@ -1,0 +1,24 @@
+	clc;
+	clear;
+3.	close all;
+4.	t=0:2*pi/100:2*pi;
+5.	x=6*sin(2*pi*t/6);
+6.	plot(x);
+7.	hold on
+8.	y=[0];
+9.	xr=0;
+10.	del=0.7;
+11.	for i=1:length(x)-1
+12.	    if xr(i)<=x(i)
+13.	        d=1;
+14.	xr(i+1)=xr(i)+del;
+15.	else
+16.	        d=0;
+17.	xr(i+1)=xr(i)-del;
+18.	end
+19.	    y=[y d]
+20.	end
+21.	stairs(xr);
+22.	xlabel('time(s)');
+23.	ylabel('Amplitude');
+24.	title('Delta Modulation');
