@@ -1,0 +1,7 @@
+clc;
+clear;close all;
+x=randi([0,1],1000,1);
+L=length(x);
+Tb=0.001;
+nb = 100;   % oversample
+pulse = [];
