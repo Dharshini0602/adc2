@@ -1,0 +1,42 @@
+clc;clear; close all;
+M=2;
+x=randi([0,1],10^6,1);
+y=[];
+for i=1:2:length(x)-1
+if  x(i)==0 && x(i+1)==0
+b=(1+1j)*(1/sqrt(2));
+elseif  x(i)==0 && x(i+1)==1
+b=(-1+1j)*(1/sqrt(2));
+elseif  x(i)==1 && x(i+1)==0
+b=(-1-1j)*(1/sqrt(2));
+elseif  x(i)==1 && x(i+1)==1
+b=(1-1j)*(1/sqrt(2));
+end
+y=[y b];
+end
+snr=0:1:30;
+br=zeros(1,length(snr));
+for i=1:length(snr)
+n=awgn(y,snr(i),'measured');
+m=[];
+for j=1:length(y)
+if  real(n(j))>0 && imag(n(j))>0
+a=[0 0];
+elseif  real(n(j))<0 && imag(n(j))>0
+a=[0 1];
+elseif  real(n(j))<0 && imag(n(j))<0
+a=[1 0];
+elseif  real(n(j))>0 && imag(n(j))<0
+a=[1 1];
+end
+m=[m a];
+end
+for j=1: length(x)
+if x(j)~=m(j)
+br(i)=br(i)+1;
+end
+end
+end
+BER=br/length(x);
+semilogy(snr,BER)
+scatterplot(n)
